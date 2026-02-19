@@ -162,16 +162,19 @@
 
 <script>
   // 🔐 REPLACE THESE WITH YOUR SUPABASE PROJECT VALUES
-  const SUPABASE_URL = "Yhttps://sueqfqewflletzhdesyd.supabase.co";
+  const SUPABASE_URL = "https://sueqfqewflletzhdesyd.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZXFmcWV3ZmxsZXR6aGRlc3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjk1NTcsImV4cCI6MjA4Njk0NTU1N30.HR03qTmZMwxDYFnJ4AHOgWO65-2Kr9j5fmRMMq7SVeg";
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Use the global supabase object from the CDN (do NOT redeclare it)
+  const { createClient } = supabase;
+  const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   async function handleSubmit(event, emailInputId, successMessageId) {
     event.preventDefault();
+
     const email = document.getElementById(emailInputId).value;
 
-    const { error } = await supabase
+    const { error } = await client
       .from('waitlist')
       .insert([{ email }]);
 
@@ -180,12 +183,10 @@
       successEl.innerHTML = "You're on the list 🌿<br><span style='font-weight:400;'>Check your inbox for updates soon.</span>";
       successEl.style.display = 'block';
       document.getElementById(emailInputId).value = '';
-
-      // Optional: smooth scroll to message
       successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
     } else {
-      alert('Something went wrong. Please try again.');
+      console.error(error);
+      alert('Submission failed. Check console for details.');
     }
   }
 

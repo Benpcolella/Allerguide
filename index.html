@@ -86,9 +86,13 @@
 
     .success-message {
       display: none;
-      margin-top: 12px;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 6px;
+      background: #e6f2ee;
       color: var(--forest);
       font-weight: 500;
+      text-align: center;
     }
 
     footer {
@@ -158,8 +162,8 @@
 
 <script>
   // 🔐 REPLACE THESE WITH YOUR SUPABASE PROJECT VALUES
-  const SUPABASE_URL = "YOUR_SUPABASE_URL";
-  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_PUBLIC_KEY";
+  const SUPABASE_URL = "Yhttps://sueqfqewflletzhdesyd.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZXFmcWV3ZmxsZXR6aGRlc3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjk1NTcsImV4cCI6MjA4Njk0NTU1N30.HR03qTmZMwxDYFnJ4AHOgWO65-2Kr9j5fmRMMq7SVeg";
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -172,8 +176,14 @@
       .insert([{ email }]);
 
     if (!error) {
-      document.getElementById(successMessageId).style.display = 'block';
+      const successEl = document.getElementById(successMessageId);
+      successEl.innerHTML = "You're on the list 🌿<br><span style='font-weight:400;'>Check your inbox for updates soon.</span>";
+      successEl.style.display = 'block';
       document.getElementById(emailInputId).value = '';
+
+      // Optional: smooth scroll to message
+      successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
     } else {
       alert('Something went wrong. Please try again.');
     }

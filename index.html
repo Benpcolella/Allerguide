@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AllerGuide | Early Access</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --forest: #1f3d36;
+      --ivory: #f7f5f0;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: auto;
+      padding: 60px 24px;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    h1 { font-size: 2.4rem; margin-bottom: 20px; }
+    h2 { font-size: 1.6rem; margin: 60px 0 20px; }
+
+    p { margin-bottom: 16px; font-size: 1rem; }
+
+    ul { margin: 20px 0; padding-left: 20px; }
+    li { margin-bottom: 10px; }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .micro {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #ddd;
+      margin: 60px 0;
+    }
+
+    .email-form { margin-top: 30px; }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--forest);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 12px;
+      color: var(--forest);
+      font-weight: 500;
+    }
+
+    footer {
+      margin-top: 80px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Taste the world — without fearing the menu.</h1>
+    <p class="hero-sub">AllerGuide is a food allergy travel navigator built for confident global exploration.</p>
+
+    <form class="email-form" id="waitlist-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Join Early Access</button>
+      <div class="success-message" id="success-message">You're on the list 🌿</div>
+    </form>
+
+    <p class="micro">Limited beta spots • Launching Spring 2026</p>
+
+    <div class="divider"></div>
+
+    <h2>If you travel with food allergies, you already know:</h2>
+    <ul>
+      <li>Every new cuisine feels risky</li>
+      <li>Ingredient lists aren’t always reliable</li>
+      <li>You double-check everything</li>
+    </ul>
+    <p>You shouldn’t have to.</p>
+
+    <h2>AllerGuide helps you:</h2>
+    <ul>
+      <li>🌿 Filter dishes by your allergens</li>
+      <li>🌍 Explore global cuisines safely</li>
+      <li>💬 Ask about ingredients instantly</li>
+    </ul>
+
+    <h2>Early members receive:</h2>
+    <ul>
+      <li>First beta access</li>
+      <li>Priority feature voting</li>
+      <li>Lowest launch pricing</li>
+    </ul>
+    <p>We’re building this carefully — which means limited access at first.</p>
+
+    <div class="divider"></div>
+
+    <h2>Ready to explore freely?</h2>
+
+    <form class="email-form" id="waitlist-form-bottom">
+      <input type="email" id="email-bottom" placeholder="Enter your email" required />
+      <button type="submit">Reserve My Spot</button>
+      <div class="success-message" id="success-message-bottom">You're on the list 🌿</div>
+    </form>
+
+    <p class="micro">No spam. Just product updates + beta access.</p>
+
+    <footer>
+      © 2026 AllerGuide. All rights reserved.
+    </footer>
+
+  </div>
+
+<script>
+  // 🔐 REPLACE THESE WITH YOUR SUPABASE PROJECT VALUES
+  const SUPABASE_URL = "YOUR_SUPABASE_URL";
+  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_PUBLIC_KEY";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function handleSubmit(event, emailInputId, successMessageId) {
+    event.preventDefault();
+    const email = document.getElementById(emailInputId).value;
+
+    const { error } = await supabase
+      .from('waitlist')
+      .insert([{ email }]);
+
+    if (!error) {
+      document.getElementById(successMessageId).style.display = 'block';
+      document.getElementById(emailInputId).value = '';
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+  }
+
+  document.getElementById('waitlist-form')
+    .addEventListener('submit', (e) => handleSubmit(e, 'email', 'success-message'));
+
+  document.getElementById('waitlist-form-bottom')
+    .addEventListener('submit', (e) => handleSubmit(e, 'email-bottom', 'success-message-bottom'));
+</script>
+
+</body>
+</html>

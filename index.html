@@ -161,11 +161,9 @@
   </div>
 
 <script>
-  // 🔐 REPLACE THESE WITH YOUR SUPABASE PROJECT VALUES
   const SUPABASE_URL = "https://sueqfqewflletzhdesyd.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZXFmcWV3ZmxsZXR6aGRlc3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjk1NTcsImV4cCI6MjA4Njk0NTU1N30.HR03qTmZMwxDYFnJ4AHOgWO65-2Kr9j5fmRMMq7SVeg";
 
-  // Use the global supabase object from the CDN (do NOT redeclare it)
   const { createClient } = supabase;
   const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -180,13 +178,12 @@
 
     if (!error) {
       const successEl = document.getElementById(successMessageId);
-      successEl.innerHTML = "You're on the list 🌿<br><span style='font-weight:400;'>Check your inbox for updates soon.</span>";
+      successEl.innerHTML = "You're on the list 🌿";
       successEl.style.display = 'block';
       document.getElementById(emailInputId).value = '';
-      successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
       console.error(error);
-      alert('Submission failed. Check console for details.');
+      alert('Submission failed. Check console.');
     }
   }
 
@@ -196,6 +193,7 @@
   document.getElementById('waitlist-form-bottom')
     .addEventListener('submit', (e) => handleSubmit(e, 'email-bottom', 'success-message-bottom'));
 </script>
+
 
 </body>
 </html>

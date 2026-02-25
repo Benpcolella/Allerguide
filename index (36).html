@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AllerGuide — Travel without fear</title>
+  <meta name="description" content="AllerGuide is a food allergy travel navigator. Filter dishes by your allergens, explore global cuisines safely, and ask about ingredients instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --forest: #1f3d36;
+      --forest-mid: #2d6a4f;
+      --accent: #3a8c5c;
+      --ivory: #f5f2ec;
+      --ivory-dark: #ede9e1;
+      --text1: #1a1a18;
+      --text2: #4a4a42;
+      --text3: #888880;
+      --border: rgba(31,61,54,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      color: var(--text1);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(245,242,236,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--forest);
+      text-decoration: none;
+    }
+
+    .nav-logo em { font-style: italic; color: var(--accent); }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--forest); }
+
+    .nav-cta {
+      background: var(--forest) !important;
+      color: #fff !important;
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-weight: 500 !important;
+      font-size: 0.875rem !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--forest-mid) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(45,106,79,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(45,106,79,0.1);
+      border: 1px solid rgba(45,106,79,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--forest-mid);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-pill span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--forest);
+      max-width: 720px;
+      margin-bottom: 22px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 em { font-style: italic; }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text2);
+      max-width: 480px;
+      margin-bottom: 44px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .email-form {
+      width: 100%;
+      max-width: 420px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .form-row {
+      display: flex; gap: 10px;
+    }
+
+    input[type="email"] {
+      flex: 1;
+      padding: 13px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      background: #fff;
+      color: var(--text1);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="email"]:focus { border-color: var(--accent); }
+    input[type="email"]::placeholder { color: var(--text3); }
+
+    .btn-primary {
+      padding: 13px 22px;
+      background: var(--forest);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--forest-mid); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .success-message {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 18px;
+      border-radius: 12px;
+      background: rgba(45,106,79,0.1);
+      color: var(--forest-mid);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .micro {
+      font-size: 0.8rem;
+      color: var(--text3);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* ── FEATURES ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1.2;
+      margin-bottom: 48px;
+    }
+
+    h2 em { font-style: italic; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(31,61,54,0.1);
+    }
+
+    .feature-emoji { font-size: 2rem; margin-bottom: 14px; }
+
+    .feature-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── BETA PERKS ── */
+    .perks-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .perks-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 1rem; color: var(--text2);
+    }
+
+    .perk-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ── BOTTOM CTA ── */
+    .cta-section {
+      background: var(--forest);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .cta-section h2 { color: #fff; margin-bottom: 14px; }
+    .cta-section p { color: rgba(255,255,255,0.65); margin-bottom: 36px; font-size: 1rem; }
+
+    .cta-section input[type="email"] {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.25);
+      color: #fff;
+      max-width: 300px;
+    }
+
+    .cta-section input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+    .cta-section input[type="email"]:focus { border-color: rgba(255,255,255,0.6); }
+
+    .cta-section .btn-primary {
+      background: #fff;
+      color: var(--forest);
+    }
+
+    .cta-section .btn-primary:hover { background: var(--ivory); }
+    .cta-section .micro { color: rgba(255,255,255,0.4); }
+    .cta-section .success-message {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .cta-form { max-width: 420px; margin: 0 auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text3);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-links { display: flex; gap: 20px; }
+
+    .footer-links a {
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--forest); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .form-row { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">Aller<em>Guide</em></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#early-access">Beta</a>
+      <a href="#early-access" class="nav-cta">Join Early Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-pill"><span></span> Spring 2026 — Limited Beta</div>
+    <h1>Taste the world —<br>without fearing <em>the menu.</em></h1>
+    <p class="hero-sub">AllerGuide is a food allergy travel navigator built for confident global exploration.</p>
+
+    <div class="email-form" id="hero-form-wrap">
+      <div class="form-row">
+        <input type="email" id="email-hero" placeholder="your@email.com" required />
+        <button class="btn-primary" onclick="handleSubmit('email-hero','success-hero')">Join Early Access</button>
+      </div>
+      <div class="success-message" id="success-hero">You're on the list 🌿 We'll be in touch soon.</div>
+      <p class="micro">No spam. Just beta access and product updates.</p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-label">How it works</div>
+    <h2>Travel freely.<br><em>Finally.</em></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-emoji">🌿</div>
+        <h3>Filter by your allergens</h3>
+        <p>Set your allergen profile once. Every dish is checked against it automatically — no more reading every label.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">🌍</div>
+        <h3>Explore global cuisines</h3>
+        <p>Vietnamese, Japanese, Mexican, Italian — browse dishes from around the world with safety flags built in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">💬</div>
+        <h3>Ask anything, instantly</h3>
+        <p>Our AI chat knows your allergens. Ask "can I eat pad thai?" and get a real, personalised answer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📖</div>
+        <h3>Save dishes & phrases</h3>
+        <p>Bookmark safe dishes for easy reordering. Save allergy phrases translated into the local language.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EARLY ACCESS -->
+  <section class="section" id="early-access">
+    <div class="section-label">Beta Programme</div>
+    <h2>Early members <em>receive:</em></h2>
+    <ul class="perks-list">
+      <li><div class="perk-dot"></div><div>First access to the iOS beta before public launch</div></li>
+      <li><div class="perk-dot"></div><div>Priority feature voting — shape what gets built next</div></li>
+      <li><div class="perk-dot"></div><div>Lowest launch pricing, locked in permanently</div></li>
+      <li><div class="perk-dot"></div><div>Direct line to the founder for feedback</div></li>
+    </ul>
+    <p style="color:var(--text2);max-width:480px;">We're building this carefully — which means limited spots at first. Join now to secure your place.</p>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <div class="cta-section">
+    <h2>Ready to explore <em>freely?</em></h2>
+    <p>Limited beta spots available. Join the waitlist today.</p>
+    <div class="cta-form">
+      <div class="form-row">
+        <input type="email" id="email-bottom" placeholder="your@email.com" required />
+        <button class="btn-primary" onclick="handleSubmit('email-bottom','success-bottom')">Reserve My Spot</button>
+      </div>
+      <div class="success-message" id="success-bottom">You're on the list 🌿 We'll be in touch soon.</div>
+      <p class="micro">No spam. Just product updates and beta access.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 AllerGuide. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="mailto:benedettoc2004@icloud.com">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://sueqfqewflletzhdesyd.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZXFmcWV3ZmxsZXR6aGRlc3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjk1NTcsImV4cCI6MjA4Njk0NTU1N30.HR03qTmZMwxDYFnJ4AHOgWO65-2Kr9j5fmRMMq7SVeg";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function handleSubmit(inputId, successId) {
+      const email = document.getElementById(inputId).value.trim();
+      if (!email) return;
+      const { error } = await supabase.from('waitlist').insert([{ email }]);
+      const el = document.getElementById(successId);
+      if (!error) {
+        el.style.display = 'block';
+        document.getElementById(inputId).value = '';
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    }
+
+    // Allow Enter key in inputs
+    document.querySelectorAll('input[type="email"]').forEach(input => {
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          const successId = input.id.replace('email-', 'success-');
+          handleSubmit(input.id, successId);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

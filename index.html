@@ -6,7 +6,7 @@
   <title>AllerGuide — Travel without fear</title>
   <meta name="description" content="AllerGuide is a food allergy travel navigator. Filter dishes by your allergens, explore global cuisines safely, and ask about ingredients instantly.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -192,6 +192,74 @@
       text-align: center;
     }
 
+    /* ── APP PREVIEW ── */
+    .preview-section {
+      max-width: 1200px;
+      margin: -40px auto 100px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .preview-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(31,61,54,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .preview-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(31,61,54,0.14);
+    }
+
+    .preview-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-card-content {
+      padding: 24px;
+    }
+
+    .preview-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+
+    .preview-card p {
+      font-size: 0.9rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .preview-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(45,106,79,0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
     /* ── FEATURES ── */
     .section {
       max-width: 900px;
@@ -353,6 +421,7 @@
       .nav-links { gap: 16px; }
       .form-row { flex-direction: column; }
       footer { flex-direction: column; align-items: flex-start; }
+      .preview-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -371,7 +440,7 @@
   <section class="hero">
     <div class="hero-pill"><span></span> Spring 2026 — Limited Beta</div>
     <h1>Taste the world —<br>without fearing <em>the menu.</em></h1>
-    <p class="hero-sub">AllerGuide is a food allergy travel navigator built for confident global exploration.</p>
+    <p class="hero-sub">AllerGuide is your personal food safety companion for navigating any cuisine, anywhere in the world.</p>
 
     <div class="email-form" id="hero-form-wrap">
       <div class="form-row">
@@ -383,6 +452,50 @@
     </div>
   </section>
 
+  <!-- APP PREVIEW -->
+  <section class="preview-section">
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div style="background: linear-gradient(135deg, #e8f4ee 0%, #d4ead9 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
+          <div style="font-size: 4rem; margin-bottom: 16px;">🏠</div>
+          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">Home Screen</div>
+          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Search 18,000+ dishes filtered by your allergens</div>
+        </div>
+        <div class="preview-card-content">
+          <span class="preview-label">Personalized Safety</span>
+          <h3>Find safe dishes anywhere</h3>
+          <p>Set your allergen profile once. Every dish from 18,000+ global options is automatically checked against your specific allergies.</p>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div style="background: linear-gradient(135deg, #fdf3e3 0%, #f9ebd4 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
+          <div style="font-size: 4rem; margin-bottom: 16px;">📋</div>
+          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">Dish Details</div>
+          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Complete ingredient breakdowns & allergen flags</div>
+        </div>
+        <div class="preview-card-content">
+          <span class="preview-label">Deep Intelligence</span>
+          <h3>Know exactly what's safe</h3>
+          <p>See complete ingredient breakdowns, allergen flags tailored to you, and detailed safety assessments for every dish.</p>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div style="background: linear-gradient(135deg, #e3f2f9 0%, #d4e8f4 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
+          <div style="font-size: 4rem; margin-bottom: 16px;">💬</div>
+          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">AI Assistant</div>
+          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Ask questions & get instant translations</div>
+        </div>
+        <div class="preview-card-content">
+          <span class="preview-label">AI-Powered Guidance</span>
+          <h3>Ask anything instantly</h3>
+          <p>Get personalized answers about dishes, generate translation cards in 40+ languages, and receive recommendations based on your allergies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURES -->
   <section class="section" id="features">
     <div class="section-label">How it works</div>
@@ -390,23 +503,33 @@
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-emoji">🌿</div>
-        <h3>Filter by your allergens</h3>
-        <p>Set your allergen profile once. Every dish is checked against it automatically — no more reading every label.</p>
+        <h3>18,000+ global dishes</h3>
+        <p>Curated database covering Vietnamese, Japanese, Mexican, Italian, and cuisines from 195 countries — with allergen data for each.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-emoji">🌍</div>
-        <h3>Explore global cuisines</h3>
-        <p>Vietnamese, Japanese, Mexican, Italian — browse dishes from around the world with safety flags built in.</p>
+        <div class="feature-emoji">🎯</div>
+        <h3>Personalized filtering</h3>
+        <p>Set your allergen profile once. Every dish is automatically flagged as safe, caution, or avoid based on your specific allergies.</p>
       </div>
       <div class="feature-card">
         <div class="feature-emoji">💬</div>
-        <h3>Ask anything, instantly</h3>
-        <p>Our AI chat knows your allergens. Ask "can I eat pad thai?" and get a real, personalised answer.</p>
+        <h3>AI chat assistant</h3>
+        <p>Ask "can I eat pad thai?" or "translate my allergies to Japanese" and get instant, personalized answers powered by AI.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-emoji">📖</div>
-        <h3>Save dishes & phrases</h3>
-        <p>Bookmark safe dishes for easy reordering. Save allergy phrases translated into the local language.</p>
+        <div class="feature-emoji">🗺️</div>
+        <h3>Country-by-country atlas</h3>
+        <p>Browse complete dish collections for each country with safety flags, dietary tags, and regional cuisine insights.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">📱</div>
+        <h3>Offline translation cards</h3>
+        <p>Save allergy phrases in 40+ languages for offline use. Show restaurant staff exactly what you can't eat, anywhere.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-emoji">👨‍👩‍👧‍👦</div>
+        <h3>Multiple profiles</h3>
+        <p>Manage allergies for your whole family. Switch between profiles instantly to check dishes for different people.</p>
       </div>
     </div>
   </section>

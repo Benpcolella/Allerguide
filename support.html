@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — AllerGuide</title>
+  <meta name="description" content="Get help with AllerGuide — the food allergy travel app. FAQs, contact support, and everything you need.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f2ec;
+      --cream-dark: #ede8df;
+      --green: #4a7c5f;
+      --green-light: #6a9e7f;
+      --green-pale: #e8f0eb;
+      --text: #1a1a18;
+      --text2: #4a4a44;
+      --text3: #888880;
+      --border: rgba(74,124,95,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245,242,236,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 40px 60px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--text2);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .contact-btn:hover {
+      background: var(--green-light);
+      transform: translateY(-1px);
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 40px 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 28px;
+    }
+
+    .faq-group {
+      margin-bottom: 48px;
+    }
+
+    .faq-group-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 18px 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: var(--green); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--green);
+      transition: transform 0.25s, background 0.2s;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 18px;
+    }
+
+    .faq-answer p {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .faq-answer a {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── CONTACT CARD ── */
+    .contact-section {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .contact-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .contact-section h2 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .contact-section p {
+      font-size: 15px;
+      color: var(--text2);
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .email-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--green);
+      text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .email-chip:hover {
+      border-color: var(--green);
+      box-shadow: 0 2px 12px rgba(74,124,95,0.12);
+    }
+
+    .email-chip svg {
+      opacity: 0.7;
+    }
+
+    .response-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--green); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 24px 40px; }
+      .faq-section { padding: 20px 24px 60px; }
+      .contact-section { padding: 48px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Aller<em>Guide</em></a>
+    <ul class="nav-links">
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/#early-access">Beta</a></li>
+      <li><a href="mailto:hello@allerguide.app">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-eyebrow">Support</span>
+    <h1>How can we <em>help?</em></h1>
+    <p>Find answers to common questions below, or reach out directly — we usually respond within 24 hours.</p>
+    <a href="mailto:hello@allerguide.app" class="contact-btn">Email Support</a>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <p class="section-label">Frequently Asked Questions</p>
+
+    <div class="faq-group">
+      <h2 class="faq-group-title">Getting Started</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          How do I set up my allergen profile?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>When you first open AllerGuide, you'll be guided through a setup flow where you can select all of your allergens from a list of 25+. You can update these at any time from the Profile tab — just tap any allergen to toggle it on or off.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          Can I use AllerGuide without creating an account?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes — you can browse dishes and explore the app as a guest. Creating an account (free) lets you save your allergen profile so it persists across devices and app reinstalls, and unlocks the AI chat and phrase translation features.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          How do I sign in with Apple?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>On the sign-up or sign-in screen, tap "Continue with Apple." You'll be prompted by iOS to authenticate with Face ID or Touch ID. If you choose to hide your email, Apple will provide a private relay address — AllerGuide works fine with either.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <h2 class="faq-group-title">Allergen Information</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          How accurate is the allergen data?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>AllerGuide's dish data is based on typical, traditional recipes. Actual ingredients vary by restaurant, chef, and region — so while we flag known allergens in standard preparations, you should always verify with restaurant staff before eating. AllerGuide is an informational tool, not a medical device.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          What allergens does AllerGuide cover?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>AllerGuide covers 25+ allergens including peanuts, tree nuts, dairy, eggs, gluten, sesame, crustaceans, molluscs, fish, soybeans, mustard, celery, lupin, sulfites, pork, and more — including less common ones like beehive products, buckwheat, and specific fruits.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          Why does the AI chat say to verify with restaurant staff?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Because recipes vary. A dish that's typically peanut-free may be prepared with peanut oil at a specific restaurant. AllerGuide gives you the best available general information, but cross-contamination and recipe variations are real — always confirm with the kitchen.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <h2 class="faq-group-title">AllerGuide Pro</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          What's included in AllerGuide Pro?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Pro unlocks unlimited AI chat conversations and the ability to save allergy phrase cards for offline use. The free plan includes a limited number of AI messages per month and access to the full dish database.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          How do I cancel my subscription?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>AllerGuide Pro is billed through Apple. To cancel, go to <strong>Settings → Apple ID → Subscriptions</strong> on your iPhone, find AllerGuide, and tap Cancel Subscription. You'll retain Pro access until the end of your current billing period.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          I was charged but my Pro features aren't showing. What do I do?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Go to your Profile tab and tap "Restore Purchases." This syncs your subscription status from Apple. If the issue persists after restoring, email us at <a href="mailto:hello@allerguide.app">hello@allerguide.app</a> with your Apple ID and we'll sort it out.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <h2 class="faq-group-title">Privacy & Data</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          Is my allergen data private?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Your allergen profile is stored securely and encrypted. We do not sell your health data to any third parties, ever. See our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggle(this)">
+          How do I delete my account and data?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Email <a href="mailto:hello@allerguide.app">hello@allerguide.app</a> with the subject "Delete my account" and we'll permanently delete your account and all associated data within 7 days.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <div class="contact-inner">
+      <h2>Still need <em>help?</em></h2>
+      <p>Can't find what you're looking for? Send us a message and we'll get back to you as soon as we can.</p>
+      <a href="mailto:hello@allerguide.app" class="email-chip">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        hello@allerguide.app
+      </a>
+      <p class="response-note">We typically respond within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">© 2026 AllerGuide. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="/privacy.html">Privacy Policy</a></li>
+      <li><a href="/terms.html">Terms of Service</a></li>
+      <li><a href="mailto:hello@allerguide.app">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function toggle(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      // Open this one if it wasn't already open
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>

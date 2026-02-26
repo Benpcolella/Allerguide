@@ -227,6 +227,47 @@
       height: auto;
       display: block;
       border-bottom: 1px solid var(--border);
+      min-height: 300px;
+      object-fit: cover;
+      background: var(--ivory-dark);
+    }
+    
+    .preview-fallback {
+      background: linear-gradient(135deg, #e8f4ee 0%, #d4ead9 100%);
+      padding: 80px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .preview-fallback.dish {
+      background: linear-gradient(135deg, #fdf3e3 0%, #f9ebd4 100%);
+    }
+    
+    .preview-fallback.chat {
+      background: linear-gradient(135deg, #e3f2f9 0%, #d4e8f4 100%);
+    }
+    
+    .preview-fallback-emoji {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+    
+    .preview-fallback-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+    
+    .preview-fallback-text {
+      font-size: 0.85rem;
+      color: var(--text2);
+      max-width: 200px;
     }
 
     .preview-card-content {
@@ -456,10 +497,13 @@
   <section class="preview-section">
     <div class="preview-grid">
       <div class="preview-card">
-        <div style="background: linear-gradient(135deg, #e8f4ee 0%, #d4ead9 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
-          <div style="font-size: 4rem; margin-bottom: 16px;">🏠</div>
-          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">Home Screen</div>
-          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Search 18,000+ dishes filtered by your allergens</div>
+        <img src="/images/home-screen.png" 
+             alt="AllerGuide home screen"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="preview-fallback" style="display: none;">
+          <div class="preview-fallback-emoji">🏠</div>
+          <div class="preview-fallback-title">Home Screen</div>
+          <div class="preview-fallback-text">Search 18,000+ dishes filtered by your allergens</div>
         </div>
         <div class="preview-card-content">
           <span class="preview-label">Personalized Safety</span>
@@ -469,10 +513,13 @@
       </div>
 
       <div class="preview-card">
-        <div style="background: linear-gradient(135deg, #fdf3e3 0%, #f9ebd4 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
-          <div style="font-size: 4rem; margin-bottom: 16px;">📋</div>
-          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">Dish Details</div>
-          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Complete ingredient breakdowns & allergen flags</div>
+        <img src="/images/dish-detail.png" 
+             alt="Dish detail view"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="preview-fallback dish" style="display: none;">
+          <div class="preview-fallback-emoji">📋</div>
+          <div class="preview-fallback-title">Dish Details</div>
+          <div class="preview-fallback-text">Complete ingredient breakdowns & allergen flags</div>
         </div>
         <div class="preview-card-content">
           <span class="preview-label">Deep Intelligence</span>
@@ -482,10 +529,13 @@
       </div>
 
       <div class="preview-card">
-        <div style="background: linear-gradient(135deg, #e3f2f9 0%, #d4e8f4 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid var(--border);">
-          <div style="font-size: 4rem; margin-bottom: 16px;">💬</div>
-          <div style="font-family: 'Fraunces', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 8px;">AI Assistant</div>
-          <div style="font-size: 0.85rem; color: var(--text2); max-width: 200px; margin: 0 auto;">Ask questions & get instant translations</div>
+        <img src="/images/ai-chat.png" 
+             alt="AI chat interface"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="preview-fallback chat" style="display: none;">
+          <div class="preview-fallback-emoji">💬</div>
+          <div class="preview-fallback-title">AI Assistant</div>
+          <div class="preview-fallback-text">Ask questions & get instant translations</div>
         </div>
         <div class="preview-card-content">
           <span class="preview-label">AI-Powered Guidance</span>
@@ -569,11 +619,11 @@
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms of Service</a>
       <a href="/support.html">Support</a>
-      <a href="mailto:hello@allerguide.app">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#d9b1bcb5b5b699b8b5b5bcabbeacb0bdbcf7b8a9a9">Contact</a>
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const SUPABASE_URL = "https://sueqfqewflletzhdesyd.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZXFmcWV3ZmxsZXR6aGRlc3lkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjk1NTcsImV4cCI6MjA4Njk0NTU1N30.HR03qTmZMwxDYFnJ4AHOgWO65-2Kr9j5fmRMMq7SVeg";
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -596,12 +646,4 @@
     document.querySelectorAll('input[type="email"]').forEach(input => {
       input.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
-          const successId = input.id.replace('email-', 'success-');
-          handleSubmit(input.id, successId);
-        }
-      });
-    });
-  </script>
-
-</body>
-</html>
+          const suc

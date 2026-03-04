@@ -6,7 +6,7 @@
   <title>AllerGuide — Travel without fear</title>
   <meta name="description" content="AllerGuide is a food allergy travel navigator. Filter dishes by your allergens, explore global cuisines safely, and ask about ingredients instantly.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;1,300;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
@@ -192,74 +192,6 @@
       text-align: center;
     }
 
-    /* ── APP PREVIEW ── */
-    .preview-section {
-      max-width: 1200px;
-      margin: -40px auto 100px;
-      padding: 0 24px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 60px;
-    }
-
-    .preview-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(31,61,54,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .preview-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(31,61,54,0.14);
-    }
-
-    .preview-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .preview-card-content {
-      padding: 24px;
-    }
-
-    .preview-card h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: var(--forest);
-      margin-bottom: 8px;
-    }
-
-    .preview-card p {
-      font-size: 0.9rem;
-      color: var(--text2);
-      line-height: 1.6;
-    }
-
-    .preview-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(45,106,79,0.1);
-      padding: 4px 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-    }
-
     /* ── FEATURES ── */
     .section {
       max-width: 900px;
@@ -421,7 +353,6 @@
       .nav-links { gap: 16px; }
       .form-row { flex-direction: column; }
       footer { flex-direction: column; align-items: flex-start; }
-      .preview-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -440,7 +371,7 @@
   <section class="hero">
     <div class="hero-pill"><span></span> Spring 2026 — Limited Beta</div>
     <h1>Taste the world —<br>without fearing <em>the menu.</em></h1>
-    <p class="hero-sub">AllerGuide is your personal food safety companion for navigating any cuisine, anywhere in the world.</p>
+    <p class="hero-sub">AllerGuide is a food allergy travel navigator built for confident global exploration.</p>
 
     <div class="email-form" id="hero-form-wrap">
       <div class="form-row">
@@ -452,38 +383,6 @@
     </div>
   </section>
 
-  <!-- APP PREVIEW -->
-  <section class="preview-section">
-    <div class="preview-grid">
-      <div class="preview-card">
-        <img src="/images/home-screen.png" alt="AllerGuide home screen">
-        <div class="preview-card-content">
-          <span class="preview-label">Personalized Safety</span>
-          <h3>Find safe dishes anywhere</h3>
-          <p>Set your allergen profile once. Every dish from 18,000+ global options is automatically checked against your specific allergies.</p>
-        </div>
-      </div>
-
-      <div class="preview-card">
-        <img src="/images/dish-detail.png" alt="Dish detail view">
-        <div class="preview-card-content">
-          <span class="preview-label">Deep Intelligence</span>
-          <h3>Know exactly what's safe</h3>
-          <p>See complete ingredient breakdowns, allergen flags tailored to you, and detailed safety assessments for every dish.</p>
-        </div>
-      </div>
-
-      <div class="preview-card">
-        <img src="/images/ai-chat.png" alt="AI chat interface">
-        <div class="preview-card-content">
-          <span class="preview-label">AI-Powered Guidance</span>
-          <h3>Ask anything instantly</h3>
-          <p>Get personalized answers about dishes, generate translation cards in 40+ languages, and receive recommendations based on your allergies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FEATURES -->
   <section class="section" id="features">
     <div class="section-label">How it works</div>
@@ -491,33 +390,23 @@
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-emoji">🌿</div>
-        <h3>18,000+ global dishes</h3>
-        <p>Curated database covering Vietnamese, Japanese, Mexican, Italian, and cuisines from 195 countries — with allergen data for each.</p>
+        <h3>Filter by your allergens</h3>
+        <p>Set your allergen profile once. Every dish is checked against it automatically — no more reading every label.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-emoji">🎯</div>
-        <h3>Personalized filtering</h3>
-        <p>Set your allergen profile once. Every dish is automatically flagged as safe, caution, or avoid based on your specific allergies.</p>
+        <div class="feature-emoji">🌍</div>
+        <h3>Explore global cuisines</h3>
+        <p>Vietnamese, Japanese, Mexican, Italian — browse dishes from around the world with safety flags built in.</p>
       </div>
       <div class="feature-card">
         <div class="feature-emoji">💬</div>
-        <h3>AI chat assistant</h3>
-        <p>Ask "can I eat pad thai?" or "translate my allergies to Japanese" and get instant, personalized answers powered by AI.</p>
+        <h3>Ask anything, instantly</h3>
+        <p>Our AI chat knows your allergens. Ask "can I eat pad thai?" and get a real, personalised answer.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-emoji">🗺️</div>
-        <h3>Country-by-country atlas</h3>
-        <p>Browse complete dish collections for each country with safety flags, dietary tags, and regional cuisine insights.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-emoji">📱</div>
-        <h3>Offline translation cards</h3>
-        <p>Save allergy phrases in 40+ languages for offline use. Show restaurant staff exactly what you can't eat, anywhere.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-emoji">👨‍👩‍👧‍👦</div>
-        <h3>Multiple profiles</h3>
-        <p>Manage allergies for your whole family. Switch between profiles instantly to check dishes for different people.</p>
+        <div class="feature-emoji">📖</div>
+        <h3>Save dishes & phrases</h3>
+        <p>Bookmark safe dishes for easy reordering. Save allergy phrases translated into the local language.</p>
       </div>
     </div>
   </section>
@@ -531,7 +420,7 @@
     <ul class="perks-list">
       <li><div class="perk-dot"></div><div>First access to the iOS beta before public launch</div></li>
       <li><div class="perk-dot"></div><div>Priority feature voting — shape what gets built next</div></li>
-      <li><div class="perk-dot"></div><div>Lowest launch pricing</div></li>
+      <li><div class="perk-dot"></div><div>Lowest launch pricing, locked in permanently</div></li>
       <li><div class="perk-dot"></div><div>Direct line to the founder for feedback</div></li>
     </ul>
     <p style="color:var(--text2);max-width:480px;">We're building this carefully — which means limited spots at first. Join now to secure your place.</p>
@@ -557,7 +446,7 @@
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms of Service</a>
       <a href="/support.html">Support</a>
-      <a href="/cdn-cgi/l/email-protection#d9b1bcb5b5b699b8b5b5bcabbeacb0bdbcf7b8a9a9">Contact</a>
+      <a href="mailto:hello@allerguide.app">Contact</a>
     </div>
   </footer>
 
@@ -567,16 +456,50 @@
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function handleSubmit(inputId, successId) {
-      const email = document.getElementById(inputId).value.trim();
-      if (!email) return;
-      const { error } = await supabase.from('waitlist').insert([{ email }]);
-      const el = document.getElementById(successId);
-      if (!error) {
-        el.style.display = 'block';
-        document.getElementById(inputId).value = '';
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        alert('Something went wrong. Please try again.');
+      const emailInput = document.getElementById(inputId);
+      const email = emailInput.value.trim();
+      
+      // Validate email
+      if (!email) {
+        alert('Please enter your email address.');
+        return;
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      
+      // Disable button during submission
+      const button = emailInput.nextElementSibling;
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Joining...';
+      
+      try {
+        const { error } = await supabase.from('waitlist').insert([{ email }]);
+        
+        if (!error) {
+          const el = document.getElementById(successId);
+          el.style.display = 'block';
+          emailInput.value = '';
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          console.error('Supabase error:', error);
+          // Check for duplicate email error
+          if (error.code === '23505') {
+            alert('This email is already on the waitlist!');
+          } else {
+            alert('Something went wrong. Please try again or email us directly at hello@allerguide.app');
+          }
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        alert('Unable to connect. Please try again or email us at hello@allerguide.app');
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
       }
     }
 
